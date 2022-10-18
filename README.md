@@ -21,6 +21,7 @@ More specifically, the script identifies all JSON files with specified location,
 
 The script supports the following languages: Czech (cs-CZ), German (de-DE), French (fr-FR), English (en-US), Spanish (es-ES), Japanese (ja-JP), Brazil Portuguese (pt-BR), Russian (ru-RU), Simplified Chinese (zh-CN) and Traditional Chinese (zh-TW). The list is based on <b>lang_map</b> dictionary data type:
 >
+      # mapping dictionary to match names of HTML folders (keys) and names of JSON files (values)
       lang_map = {'cs-CZ': 'cs_CZ',
                   'de-DE': 'de_DE',
                   'fr-FR': 'fr_FR',
