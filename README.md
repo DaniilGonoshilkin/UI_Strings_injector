@@ -57,4 +57,4 @@ No external dependencies required to run the script
 
 ## 3. Run the script
 
-python injector.py <PATH TO JSON FILES> <PATH TO SOURCE FOLDER> <PATH TO TARGET FOLDER>
+python injector.py '<PATH TO JSON FILES>' '<PATH TO SOURCE FOLDER>' '<PATH TO TARGET FOLDER>'
