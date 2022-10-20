@@ -1,9 +1,10 @@
 # UI Strings injector
 
-This script is used for auto-injection of product's UI strings into product's documentation.
-When you have a task to localize both User Interface and Documentation for a particular application, you would eventually face the question: how to keep consistent translation between actual UI strings and their references in Documentation? There are diiferent ways to approach this problem, but from my experience working as a Localization Engineer, the best solution is to 'inject' the actual UI strings (from project's resource files) into Documentation files (in my case, Documentation is Online and represented as a number of HTML topics).
+This script is used for auto-'injection' of product's UI strings into product's documentation.
 
 # General info
+
+When you have a task to localize both User Interface and Documentation for a particular application, you would eventually face the question: how to keep consistent translation between actual UI strings and their references in Documentation? There are diiferent ways to approach this problem, but from my experience working as a Localization Engineer, the best solution is to replace all instances of UI references in Documentation with a special placeholders (keys) and subsequently 'inject' the actual UI strings (from project's resource files) into Documentation files, replacing the above mentioned placeholders (in my case, Documentation is Online and represented as a number of HTML topics).
 
 ## File types
 
@@ -11,13 +12,13 @@ This script works if all UI strings of your project are contained within one or 
 
 ## File specifications
 
-JSON files should be designed in a simple way, as a straight list of attributes and values, with no nestings and/or indentations. Encoding must be UTF-8 without BOM. Attribute names should be unique.
-For HTML files, all the instances of UI strings in text (e.g. button names, section or tab titles) should be repleaced with placeholders <b>[[AttributeNameInJSONFile]]</b> (unique identifier from JSON file enclosed within double square brackets).
+JSON files should be designed in a simple way, as a straight list of attributes and values, with no nestings and/or indentations. Encoding must be UTF-8 without BOM. Attribute names (keys) should be unique.
+For HTML files, all the instances of UI strings in text (e.g. button names, section or tab titles) should be repleaced with placeholders <b>[[AttributeNameInJSONFile]]</b> (unique identifier (key) from JSON file enclosed within double square brackets).
 
 ## How the script works
 
 The script looks for placeholders in all HTML files within specified location and replaces them with actual UI strings from JSON files.
-More specifically, the script identifies all JSON files with specified location, creates a unified dictionary data type in Python, then reads each HTML file subsequently in a loop. When a placeholder found in text, the script extracts uniqe ID (key) from the placeholder, search for this key in the dictionary and (if found) substitutes whole placeholder in HTML with a corresponding value, which is a required UI string.
+More specifically, the script identifies all JSON files within specified location, creates a unified dictionary data type in Python, then reads each HTML file subsequently in a loop. When a placeholder is found in text, the script extracts uniqe ID (key) from the placeholder, search for this key in the dictionary and (if found) substitutes a whole placeholder in HTML with a corresponding value, which is a correct UI string.
 
 ## Languages
 
@@ -60,3 +61,8 @@ No external dependencies required to run the script
 Run the following command in Console
 
       python injector.py `<PATH TO JSON FILES>` `<PATH TO SOURCE FOLDER>` `<PATH TO TARGET FOLDER>`
+
+where:
+* `<PATH TO JSON FILES>` - folder with JSON files (all languages), the script search JSON files in subfolders as well
+* `<PATH TO SOURCE FOLDER>` - folder with unprocessed HTML files (with [[id]] keys), should contain one or multiple subfolders named after each language (en-US, zh-CN, etc.)
+* `<PATH TO TARGET FOLDER>` - folder, where the script should put the processed HTML files ([[id]] keys are replaced with UI strings)
