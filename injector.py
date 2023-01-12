@@ -8,10 +8,10 @@ from distutils.dir_util import copy_tree, remove_tree
 
 def strip_dictionary(dictionary):
     for key in dictionary.keys():
-        dictionary[key] = re.sub(r'\s*\{\{.+?\}\}\s*', '', dictionary[key]) # strip angular expressions {{angular}}
-        dictionary[key] = re.sub(r'[,;:.!\?]+$', '', dictionary[key]) # remove punctuation marks at the end of string
-        dictionary[key] = re.sub(r'<br\s*[\/]?>', ' ', dictionary[key]) # replace <br/> tag on whitespace
-        dictionary[key] = re.sub(r'<(?:.|\n)*?>', '', dictionary[key]) # strip tags
+        dictionary[key] = re.sub(r'\s*\{\{.+?\}\}\s*', '', dictionary[key])  # strip angular expressions {{angular}}
+        dictionary[key] = re.sub(r'[,;:.!\?]+$', '', dictionary[key])  # remove punctuation marks at the end of string
+        dictionary[key] = re.sub(r'<br\s*[\/]?>', ' ', dictionary[key])  # replace <br/> tag on whitespace
+        dictionary[key] = re.sub(r'<(?:.|\n)*?>', '', dictionary[key])  # strip tags
     return dictionary
 
 
@@ -96,6 +96,7 @@ def clean_target(tgt_path):
         remove_tree(f)
     print('Target folder cleared')
 
+
 def strip_separator(m):
     """
     ***Specific case for a particular project only***
@@ -117,7 +118,7 @@ def try_replace(m, dictionary, filename):
 
 def inject_strings(html_files, dictionary):
     pattern = re.compile(r'\[\[([^\[\]]+)\]\]')
-    separator_pattern = re.compile(r'\[\[([^\[\]]+\|\|[^\[\]]+)\]\]') # pattern for '||' separator
+    separator_pattern = re.compile(r'\[\[([^\[\]]+\|\|[^\[\]]+)\]\]')  # pattern for '||' separator
     for htm in html_files:
         if htm.endswith('all-in-one.htm') or not htm.endswith('.htm'):
             print(htm, 'skipped')
@@ -138,7 +139,7 @@ if __name__ == "__main__":
     if len(sys.argv) < 4:
         sys.exit('Three arguments required: <PATH TO JSON FILES> <PATH TO SOURCE FOLDER> <PATH TO TARGET FOLDER>')
 
-    os.system('color') # to support colored output in Windows console
+    os.system('color')  # to support colored output in Windows console
     json_path = sys.argv[1]
     json_list = []
     json_list = iterate_folders(json_path, json_list, flag='F')
